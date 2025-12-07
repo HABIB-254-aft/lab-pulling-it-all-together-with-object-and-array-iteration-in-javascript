@@ -114,3 +114,79 @@ function gameObject() {
         },
     };
 }
+
+function numPointsScored(playerName) { 
+    const data = gameObject();
+    for (const team of Object.values(data)) {
+      for (const [name, stats] of Object.entries(team.players)) {
+        if (name === playerName) {
+          return stats.points;
+        }
+      }
+    }
+  }
+  function shoeSize(playerName) {
+    const data = gameObject();
+    for (const team of Object.values(data)) {
+      for (const [name, stats] of Object.entries(team.players)) {
+        if (name === playerName) {
+          return stats.shoe;
+        }
+      }
+    }
+  }
+  function teamColors(teamName) { 
+    const data = gameObject();
+    for (const team of Object.values(data)) {
+      if (team.teamName === teamName) {
+        return team.colors;
+      }
+    }
+  }
+  function teamNames() { 
+    const data = gameObject();
+    return Object.values(data).map(team => team.teamName);
+  }
+  function playerNumbers(teamName) { 
+    const data = gameObject();
+    for (const team of Object.values(data)) {
+      if (team.teamName === teamName) {
+        return Object.values(team.players).map(player => player.number);
+      }
+    }
+  }
+  function playerStats(playerName) {
+    const data = gameObject();
+    for (const team of Object.values(data)) {
+      for (const [name, stats] of Object.entries(team.players)) {
+        if (name === playerName) {
+          return stats;
+        }
+      }
+    }
+  }
+  function bigShoeRebounds() {
+    const data = gameObject();
+    let biggestShoeSize = 0;
+    let rebounds = 0;
+  
+    for (const team of Object.values(data)) {
+      for (const stats of Object.values(team.players)) {
+        if (stats.shoe > biggestShoeSize) {
+          biggestShoeSize = stats.shoe;
+          rebounds = stats.rebounds;
+        }
+      }
+    }
+    return rebounds;
+  }
+
+  module.exports = {
+    numPointsScored,
+    shoeSize,
+    teamColors,
+    teamNames,
+    playerNumbers,
+    playerStats,
+    bigShoeRebounds
+  };
